@@ -15,13 +15,9 @@ func deleteUser(c *gin.Context) {
 		CaseLevel: false,
 	})
 	objID, err := primitive.ObjectIDFromHex(c.Param("id"))
-	if err != nil {
-		panic(err)
-	}
+	checkError(c, err)
 	filter := bson.D{{"_id", objID}}
 	_, err = db.Collection.DeleteOne(context.TODO(), filter, opts)
-	if err != nil {
-		panic(err)
-	}
+	checkError(c, err)
 	c.JSON(404, nil)
 }
