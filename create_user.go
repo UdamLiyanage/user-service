@@ -20,5 +20,5 @@ func createUser(c *gin.Context) {
 		panic(err)
 	}
 	user.ID = insertResult.InsertedID.(primitive.ObjectID)
-	c.JSON(200, user)
+	c.JSON(201, user)
 }
