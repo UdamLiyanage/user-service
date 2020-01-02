@@ -11,7 +11,7 @@ type User struct {
 	LastName        string              `json:"last_name" bson:"last_name"`
 	Email           string              `json:"email" bson:"email"`
 	Password        string              `json:"password" bson:"password"`
-	ContactNumbers  []string            `json:"contact_numbers,omitempty" bson:"contact_numbers,omitempty"`
+	ContactNumber   string              `json:"contact_numbers,omitempty" bson:"contact_numbers,omitempty"`
 	Address         map[string]string   `json:"address,omitempty" bson:"address,omitempty"`
 	Devices         []map[string]string `json:"devices,omitempty" bson:"devices,omitempty"`
 	EmailVerifiedAt time.Time           `json:"email_verified_at,omitempty" bson:"email_verified_at,omitempty"`

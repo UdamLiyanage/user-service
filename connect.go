@@ -8,8 +8,8 @@ import (
 )
 
 func connect() *mongo.Collection {
-	clientOptions := options.Client().ApplyURI("mongodb+srv://user-service:kmhCAVmtwPmF42Rq@platform-test-5fvzo.gcp.mongodb.net/test?retryWrites=true&w=majority")
-	client, err := mongo.Connect(context.TODO(), clientOptions)
+	clientOptions := options.Client().ApplyURI("mongodb+srv://user-service:RCIcEjYEtMJTuhHS@platform-test-5fvzo.gcp.mongodb.net/test?retryWrites=true&w=majority")
+	client, err := mongo.Connect(context.Background(), clientOptions)
 	if err != nil {
 		log.Fatal(err)
 	}
