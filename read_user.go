@@ -10,14 +10,10 @@ import (
 func readUser(c *gin.Context) {
 	var user map[string]interface{}
 	objID, err := primitive.ObjectIDFromHex(c.Param("id"))
-	if err != nil {
-		panic(err)
-	}
+	checkError(c, err)
 	filter := bson.M{"_id": objID}
 	err = db.Collection.FindOne(context.TODO(), filter).Decode(&user)
-	if err != nil {
-		panic(err)
-	}
+	checkError(c, err)
 	delete(user, "password")
 	c.JSON(200, user)
 }
