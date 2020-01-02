@@ -11,14 +11,10 @@ import (
 func createUser(c *gin.Context) {
 	var user User
 	err := json.NewDecoder(c.Request.Body).Decode(&user)
-	if err != nil {
-		panic(err)
-	}
+	checkError(c, err)
 	user.CreatedAt = time.Now()
 	insertResult, err := db.Collection.InsertOne(context.TODO(), user)
-	if err != nil {
-		panic(err)
-	}
+	checkError(c, err)
 	user.ID = insertResult.InsertedID.(primitive.ObjectID)
 	c.JSON(201, user)
 }
