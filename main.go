@@ -15,13 +15,13 @@ var db = Database{Collection: connect()}
 func setupRouter() *gin.Engine {
 	r := gin.Default()
 
-	r.GET("/users/:id")
+	r.GET("/users/:id", readUser)
 
-	r.POST("/users")
+	r.POST("/users", createUser)
 
-	r.PUT("/users/:id")
+	r.PUT("/users/:id", updateUser)
 
-	r.DELETE("/users/:id")
+	r.DELETE("/users/:id", deleteUser)
 	return r
 }
 
