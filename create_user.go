@@ -13,7 +13,7 @@ func createUser(c *gin.Context) {
 	var user User
 	err := json.NewDecoder(c.Request.Body).Decode(&user)
 	checkError(c, err)
-	user.Password = hashPassword(user.Password)
+	user.Password = hashPassword(c, user.Password)
 	user.CreatedAt = time.Now()
 	insertResult, err := db.Collection.InsertOne(context.TODO(), user)
 	checkError(c, err)
@@ -21,10 +21,8 @@ func createUser(c *gin.Context) {
 	c.JSON(201, user)
 }
 
-func hashPassword(p string) string {
+func hashPassword(c *gin.Context, p string) string {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(p), 10)
-	if err != nil {
-		panic(err)
-	}
+	checkError(c, err)
 	return string(bytes)
 }
