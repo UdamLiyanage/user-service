@@ -1,7 +1,48 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"context"
+	"encoding/json"
+	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
 
 func updateUser(c *gin.Context) {
-	c.String(200, "Update User")
+	var body map[string]interface{}
+	err := json.NewDecoder(c.Request.Body).Decode(&body)
+	if err != nil {
+		panic(err)
+	}
+	objID, err := primitive.ObjectIDFromHex(c.Param("id"))
+	if err != nil {
+		panic(err)
+	}
+	filter := bson.M{"_id": objID}
+	if _, exists := body["first_name"]; exists {
+		update := bson.M{
+			"$set": bson.M{
+				"first_name": body["first_name"],
+			},
+		}
+		_, err = db.Collection.UpdateOne(context.TODO(), filter, update)
+	} else if _, exists := body["last_name"]; exists {
+		update := bson.M{
+			"$set": bson.M{
+				"first_name": body["first_name"],
+			},
+		}
+		_, err = db.Collection.UpdateOne(context.TODO(), filter, update)
+
+	} else {
+		update := bson.M{
+			"$set": bson.M{
+				"first_name": body["first_name"],
+				"last_name":  body["last_name"],
+			},
+		}
+		_, err = db.Collection.UpdateOne(context.TODO(), filter, update)
+	}
+
+	c.JSON(200, body)
 }
