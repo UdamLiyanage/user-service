@@ -16,11 +16,7 @@ Below is the structure of the JSON document that holds user data
 	"last_name": "Last Name",
 	"email": "email@email.com",
 	"password": "password",
-	"contact_number": [
-		"0000000000",
-		"1111111111",
-		"2222222222"
-	],
+	"contact_number": "0000000000",
 	"address": {
 		"line_1": "Address Line 1",
 		"line_2": "Address Line 2",
