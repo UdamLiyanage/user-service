@@ -1,4 +1,6 @@
 # User Microservice
+Build Status: ![](https://github.com/UdamLiyanage/user-service/workflows/Go/badge.svg)
+***
 User Microservice for IoT Platform. This service is responsible to the following features:
 *Create users
 *Read user data
