@@ -5,7 +5,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func checkError(err error, c *gin.Context) {
+func checkError(c *gin.Context, err error) {
 	if err == nil {
 		return
 	}
