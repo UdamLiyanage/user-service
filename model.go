@@ -18,3 +18,9 @@ type User struct {
 	CreatedAt       time.Time           `json:"created_at,omitempty" bson:"created_at,omitempty"`
 	UpdatedAt       time.Time           `json:"updated_at,omitempty" bson:"updated_at,omitempty"`
 }
+
+type AttachDevice struct {
+	UserID     primitive.ObjectID `json:"user_id" bson:"user_id"`
+	DeviceID   string             `json:"device_id" bson:"device_id"`
+	DeviceName string             `json:"device_name" bson:"device_name"`
+}
