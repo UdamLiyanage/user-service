@@ -24,3 +24,9 @@ type AttachDevice struct {
 	DeviceID   string             `json:"device_id" bson:"device_id"`
 	DeviceName string             `json:"device_name" bson:"device_name"`
 }
+
+type AttachOrganisation struct {
+	UserID           primitive.ObjectID `json:"user_id" bson:"user_id"`
+	OrganisationID   string             `json:"organisation_id" bson:"organisation_id"`
+	OrganisationName string             `json:"organisation_name" bson:"organisation_name"`
+}

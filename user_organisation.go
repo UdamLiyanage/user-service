@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -9,7 +10,21 @@ import (
 )
 
 func attachOrganisation(c *gin.Context) {
-	c.String(200, "Attach Organisation")
+	var attach AttachOrganisation
+	err := json.NewDecoder(c.Request.Body).Decode(&attach)
+	checkError(c, err)
+	filter := bson.M{"_id": attach.UserID}
+	update := bson.M{
+		"$addToSet": bson.M{
+			"organisations": bson.M{
+				"organisation_id":   attach.OrganisationID,
+				"organisation_name": attach.OrganisationName,
+			},
+		},
+	}
+	res, err := db.Collection.UpdateOne(context.TODO(), filter, update)
+	checkError(c, err)
+	c.JSON(201, res)
 }
 
 func getAttachedOrganisations(c *gin.Context) {
