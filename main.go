@@ -22,6 +22,7 @@ func setupRouter() *gin.Engine {
 	r.POST("/users", createUser)
 	r.POST("/login", login)
 	r.POST("/users/attach/device", attachDevice)
+	r.POST("/users/attach/organisation", attachOrganisation)
 
 	r.PUT("/users/:id", updateUser)
 

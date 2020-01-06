@@ -8,6 +8,10 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+func attachOrganisation(c *gin.Context) {
+	c.String(200, "Attach Organisation")
+}
+
 func getAttachedOrganisations(c *gin.Context) {
 	var res []map[string]interface{}
 	objID, err := primitive.ObjectIDFromHex(c.Param("id"))
