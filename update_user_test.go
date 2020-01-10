@@ -36,7 +36,7 @@ func TestUpdateDeviceInvalid(t *testing.T) {
 	}
 	r := newRouter()
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("PUT", "/devices/000000000000000000000000", bytes.NewBuffer(body))
+	req, _ := http.NewRequest("PUT", "/users/000000000000000000000000", bytes.NewBuffer(body))
 	r.ServeHTTP(w, req)
 	if w.Code != http.StatusOK {
 		t.Errorf("Status should be 200, got %d", w.Code)

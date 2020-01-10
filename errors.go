@@ -10,10 +10,8 @@ func checkError(c *gin.Context, err error) {
 		return
 	}
 	if err == mongo.ErrNoDocuments {
-		notFoundResponse(c)
+		c.AbortWithStatusJSON(404, err)
+	} else {
+		c.AbortWithStatusJSON(500, err)
 	}
-}
-
-func notFoundResponse(c *gin.Context) {
-	_ = c.AbortWithError(404, nil)
 }
