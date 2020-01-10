@@ -34,7 +34,7 @@ func TestCreateDeviceAndDelete(t *testing.T) {
 	}
 
 	_ = json.NewDecoder(createRecorder.Body).Decode(&user)
-	deleteRequest, _ := http.NewRequest("DELETE", "/devices/"+user.ID.Hex(), nil)
+	deleteRequest, _ := http.NewRequest("DELETE", "/users/"+user.ID.Hex(), nil)
 	deleteRecorder := httptest.NewRecorder()
 	r.ServeHTTP(deleteRecorder, deleteRequest)
 	if deleteRecorder.Code != http.StatusNotFound {
