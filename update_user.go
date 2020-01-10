@@ -22,14 +22,14 @@ func updateUser(c *gin.Context) {
 				"first_name": body["first_name"],
 			},
 		}
-		_, err = db.Collection.UpdateOne(context.TODO(), filter, update)
+		_, err = DB.Collection.UpdateOne(context.TODO(), filter, update)
 	} else if _, exists := body["last_name"]; exists {
 		update := bson.M{
 			"$set": bson.M{
 				"first_name": body["first_name"],
 			},
 		}
-		_, err = db.Collection.UpdateOne(context.TODO(), filter, update)
+		_, err = DB.Collection.UpdateOne(context.TODO(), filter, update)
 	} else {
 		update := bson.M{
 			"$set": bson.M{
@@ -37,7 +37,7 @@ func updateUser(c *gin.Context) {
 				"last_name":  body["last_name"],
 			},
 		}
-		_, err = db.Collection.UpdateOne(context.TODO(), filter, update)
+		_, err = DB.Collection.UpdateOne(context.TODO(), filter, update)
 	}
 	checkError(c, err)
 	c.JSON(200, body)

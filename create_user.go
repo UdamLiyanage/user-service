@@ -15,7 +15,7 @@ func createUser(c *gin.Context) {
 	checkError(c, err)
 	user.Password = hashPassword(c, user.Password)
 	user.CreatedAt = time.Now()
-	insertResult, err := db.Collection.InsertOne(context.TODO(), user)
+	insertResult, err := DB.Collection.InsertOne(context.TODO(), user)
 	checkError(c, err)
 	user.ID = insertResult.InsertedID.(primitive.ObjectID)
 	c.JSON(201, user)

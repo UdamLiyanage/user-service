@@ -14,7 +14,7 @@ func login(c *gin.Context) {
 	err := json.NewDecoder(c.Request.Body).Decode(&credentials)
 	checkError(c, err)
 	filter := bson.M{"email": credentials["email"]}
-	err = db.Collection.FindOne(context.TODO(), filter).Decode(&user)
+	err = DB.Collection.FindOne(context.TODO(), filter).Decode(&user)
 	checkError(c, err)
 	if !checkPassword(credentials["password"].(string), user.Password) {
 		c.AbortWithStatusJSON(401, nil)
