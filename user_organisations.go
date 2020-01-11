@@ -13,7 +13,9 @@ func attachOrganisation(c *gin.Context) {
 	var attach AttachOrganisation
 	err := json.NewDecoder(c.Request.Body).Decode(&attach)
 	checkError(c, err)
-	filter := bson.M{"_id": attach.UserID}
+	objectID, err := primitive.ObjectIDFromHex(attach.UserID)
+	checkError(c, err)
+	filter := bson.M{"_id": objectID}
 	update := bson.M{
 		"$addToSet": bson.M{
 			"organisations": bson.M{

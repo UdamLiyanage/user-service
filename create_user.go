@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/crypto/bcrypt"
 	"time"
 )
@@ -17,8 +16,13 @@ func createUser(c *gin.Context) {
 	user.CreatedAt = time.Now()
 	insertResult, err := DB.Collection.InsertOne(context.TODO(), user)
 	checkError(c, err)
-	user.ID = insertResult.InsertedID.(primitive.ObjectID)
-	c.JSON(201, user)
+	c.JSON(201, map[string]interface{}{
+		"id":             insertResult.InsertedID,
+		"first_name":     user.FirstName,
+		"last_name":      user.LastName,
+		"email":          user.Email,
+		"contact_number": user.ContactNumber,
+	})
 }
 
 func hashPassword(c *gin.Context, p string) string {

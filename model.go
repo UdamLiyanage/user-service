@@ -1,12 +1,11 @@
 package main
 
 import (
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
 )
 
 type User struct {
-	ID              primitive.ObjectID  `json:"_id,omitempty" bson:"_id,omitempty"`
+	ID              string              `json:"_id,omitempty" bson:"_id,omitempty"`
 	FirstName       string              `json:"first_name" bson:"first_name"`
 	LastName        string              `json:"last_name" bson:"last_name"`
 	Email           string              `json:"email" bson:"email"`
@@ -26,7 +25,7 @@ type AttachDevice struct {
 }
 
 type AttachOrganisation struct {
-	UserID           primitive.ObjectID `json:"user_id" bson:"user_id"`
-	OrganisationID   string             `json:"organisation_id" bson:"organisation_id"`
-	OrganisationName string             `json:"organisation_name" bson:"organisation_name"`
+	UserID           string `json:"user_id" bson:"user_id"`
+	OrganisationID   string `json:"organisation_id" bson:"organisation_id"`
+	OrganisationName string `json:"organisation_name" bson:"organisation_name"`
 }
