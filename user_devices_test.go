@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"
 	"testing"
 )
 
@@ -18,13 +16,8 @@ func TestAttachDevice(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	r := newRouter()
-	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("POST", "/users/attach/device", bytes.NewBuffer(body))
-	r.ServeHTTP(w, req)
-	if w.Code != http.StatusCreated {
-		t.Errorf("Status should be 201, got %d", w.Code)
-	}
+	w := testRequestStatusCode("POST", "/users/attach/device", body, http.StatusCreated, t)
+	testRequestBody(w, "ModifiedCount", 0, t)
 }
 
 func TestRemoveAttachedDevice(t *testing.T) {
@@ -35,11 +28,6 @@ func TestRemoveAttachedDevice(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	r := newRouter()
-	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("POST", "/users/remove/device", bytes.NewBuffer(body))
-	r.ServeHTTP(w, req)
-	if w.Code != http.StatusNotFound {
-		t.Errorf("Status should be 404, got %d", w.Code)
-	}
+	w := testRequestStatusCode("POST", "/users/remove/device", body, http.StatusNotFound, t)
+	testRequestBody(w, "ModifiedCount", 0, t)
 }
