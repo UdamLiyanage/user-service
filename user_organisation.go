@@ -35,7 +35,7 @@ func getAttachedOrganisations(c *gin.Context) {
 		context.Background(),
 		bson.M{"_id": objID},
 		options.Find().SetProjection(bson.D{
-			{"organisations", 1},
+			bson.E{Key: "organisations", Value: 1},
 		}),
 	)
 	checkError(c, err)
