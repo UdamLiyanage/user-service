@@ -29,6 +29,25 @@ func attachDevice(c *gin.Context) {
 	c.JSON(201, res)
 }
 
+func removeDevice(c *gin.Context) {
+	var remove map[string]string
+	err := json.NewDecoder(c.Request.Body).Decode(&remove)
+	checkError(c, err)
+	objectID, err := primitive.ObjectIDFromHex(remove["user_id"])
+	checkError(c, err)
+	filter := bson.M{"_id": objectID}
+	update := bson.M{
+		"$pull": bson.M{
+			"devices": bson.M{
+				"device_id": remove["device_id"],
+			},
+		},
+	}
+	res, err := DB.Collection.UpdateOne(context.TODO(), filter, update)
+	checkError(c, err)
+	c.JSON(404, res)
+}
+
 func getAttachedDevices(c *gin.Context) {
 	var res []map[string]interface{}
 	objID, err := primitive.ObjectIDFromHex(c.Param("id"))
