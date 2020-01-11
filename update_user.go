@@ -17,7 +17,6 @@ func updateUser(c *gin.Context) {
 	objID, err := primitive.ObjectIDFromHex(c.Param("id"))
 	checkError(c, err)
 	filter := bson.M{"_id": objID}
-	err = nil
 	if _, exists := body["first_name"]; exists {
 		update := bson.M{
 			"$set": bson.M{
