@@ -19,7 +19,7 @@ func createUser(c *gin.Context) {
 	checkError(c, err)
 	if oid, ok := insertResult.InsertedID.(primitive.ObjectID); ok {
 		c.JSON(201, map[string]interface{}{
-			"id":             oid.Hex(),
+			"id":             oid.String(),
 			"first_name":     user.FirstName,
 			"last_name":      user.LastName,
 			"email":          user.Email,
