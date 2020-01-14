@@ -26,5 +26,5 @@ func TestCreateDeviceAndDelete(t *testing.T) {
 	createRecorder := testRequestStatusCode("POST", "/users", body, http.StatusCreated, t)
 
 	_ = json.NewDecoder(createRecorder.Body).Decode(&user)
-	testRequestStatusCode("DELETE", "/users"+user.ID, nil, http.StatusNotFound, t)
+	testRequestStatusCode("DELETE", "/users/"+user.ID, nil, http.StatusNotFound, t)
 }
