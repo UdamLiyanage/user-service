@@ -24,8 +24,10 @@ func newRouter() *gin.Engine {
 	r.GET("/users/:id", readUser)
 	r.POST("/users", createUser)
 	r.POST("/users/attach/device", attachDevice)
-	r.DELETE("/users/:id", deleteUser)
 	r.POST("/users/remove/device", removeDevice)
+	r.POST("/users/attach/device-definition", attachDeviceDefinition)
+	r.POST("/users/remove/device-definition", removeDeviceDefinition)
+	r.DELETE("/users/:id", deleteUser)
 	r.PUT("/users/:id", updateUser)
 	return r
 }
