@@ -19,8 +19,7 @@ func attachDevice(c *gin.Context) {
 	update := bson.M{
 		"$addToSet": bson.M{
 			"devices": bson.M{
-				"device_id":   attach.DeviceID,
-				"device_name": attach.DeviceName,
+				"device_id": attach.DeviceID,
 			},
 		},
 	}

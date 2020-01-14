@@ -19,8 +19,7 @@ func attachOrganisation(c *gin.Context) {
 	update := bson.M{
 		"$addToSet": bson.M{
 			"organisations": bson.M{
-				"organisation_id":   attach.OrganisationID,
-				"organisation_name": attach.OrganisationName,
+				"organisation_id": attach.OrganisationID,
 			},
 		},
 	}

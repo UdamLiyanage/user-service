@@ -8,9 +8,8 @@ import (
 
 func TestAttachDevice(t *testing.T) {
 	attach := AttachDevice{
-		UserID:     "5e0e2480031e0b729112ff2d",
-		DeviceID:   "test_id",
-		DeviceName: "Test Device Name",
+		UserID:   "5e0e2480031e0b729112ff2d",
+		DeviceID: "test_id",
 	}
 	body, err := json.Marshal(attach)
 	if err != nil {
