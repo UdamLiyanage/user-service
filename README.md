@@ -40,3 +40,36 @@ Below is the structure of the JSON document that holds user data
 	"updated_at": "Updated Time"
 }
 ```
+***
+## Document Structure for User - Revision 1
+```
+{
+	"first_name": "First Name",
+	"last_name": "Last Name",
+	"email": "email@email.com",
+	"password": "password",
+	"contact_number": "0000000000",
+	"address": {
+		"line_1": "Address Line 1",
+		"line_2": "Address Line 2",
+		"line_3": "Address Line 3",
+		"postcode": "Postcode",
+		"country": "Country"
+	},
+	"devices": [
+		"device_id_1",
+		"device_id_2"
+	],
+	"organisations": [
+		"organisation_id_1",
+		"organisation_id_2"
+	],
+	"device-definitions": [
+		"definition_id_1",
+		"definition_id_2"
+	],
+	"email_verified_at": "Verified Time",
+	"created_at": "Created Time",
+	"updated_at": "Updated Time"
+}
+```
