@@ -17,10 +17,8 @@ func attachDevice(c *gin.Context) {
 	checkError(c, err)
 	filter := bson.M{"_id": objectID}
 	update := bson.M{
-		"$addToSet": bson.M{
-			"devices": bson.M{
-				"device_id": attach.DeviceID,
-			},
+		"$push": bson.M{
+			"devices": attach.DeviceID,
 		},
 	}
 	res, err := DB.Collection.UpdateOne(context.TODO(), filter, update)
@@ -38,7 +36,7 @@ func removeDevice(c *gin.Context) {
 	update := bson.M{
 		"$pull": bson.M{
 			"devices": bson.M{
-				"device_id": remove["device_id"],
+				"$in": bson.A{remove["device_id"]},
 			},
 		},
 	}

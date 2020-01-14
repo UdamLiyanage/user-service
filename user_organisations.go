@@ -17,10 +17,8 @@ func attachOrganisation(c *gin.Context) {
 	checkError(c, err)
 	filter := bson.M{"_id": objectID}
 	update := bson.M{
-		"$addToSet": bson.M{
-			"organisations": bson.M{
-				"organisation_id": attach.OrganisationID,
-			},
+		"$push": bson.M{
+			"organisations": attach.OrganisationID,
 		},
 	}
 	res, err := DB.Collection.UpdateOne(context.TODO(), filter, update)

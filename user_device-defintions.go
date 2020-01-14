@@ -17,9 +17,7 @@ func attachDeviceDefinition(c *gin.Context) {
 	filter := bson.M{"_id": objectID}
 	update := bson.M{
 		"$addToSet": bson.M{
-			"device-definitions": bson.M{
-				"definition_id": attach.DefinitionID,
-			},
+			"device-definitions": attach.DefinitionID,
 		},
 	}
 	res, err := DB.Collection.UpdateOne(context.TODO(), filter, update)
@@ -37,7 +35,7 @@ func removeDeviceDefinition(c *gin.Context) {
 	update := bson.M{
 		"$pull": bson.M{
 			"device-definitions": bson.M{
-				"definition_id": remove["definition_id"],
+				"$in": bson.A{remove["definition_id"]},
 			},
 		},
 	}
