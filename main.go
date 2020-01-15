@@ -24,7 +24,7 @@ func setupRouter() *gin.Engine {
 	r.GET("/users/:id/organisations", getAttachedOrganisations)
 	r.GET("/users/:id/device-definitions", getAttachedDeviceDefinitions)
 
-	r.POST("/users", createUser)
+	r.POST("/users/create", createUser)
 	r.POST("/login", login)
 	r.POST("/users/attach/device", attachDevice)
 	r.POST("/users/remove/device", removeDevice)
