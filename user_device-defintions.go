@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -53,9 +52,5 @@ func getAttachedDeviceDefinitions(c *gin.Context) {
 		"device_definitions",
 		bson.M{"_id": objID},
 	)
-	for _, value := range values {
-		str := fmt.Sprintf("%v", value)
-		println(str)
-	}
 	c.JSON(200, values)
 }
