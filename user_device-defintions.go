@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -42,4 +43,19 @@ func removeDeviceDefinition(c *gin.Context) {
 	res, err := DB.Collection.UpdateOne(context.TODO(), filter, update)
 	checkError(c, err)
 	c.JSON(200, res)
+}
+
+func getAttachedDeviceDefinitions(c *gin.Context) {
+	objID, err := primitive.ObjectIDFromHex(c.Param("id"))
+	checkError(c, err)
+	values, err := DB.Collection.Distinct(
+		context.TODO(),
+		"device_definitions",
+		bson.M{"_id": objID},
+	)
+	for _, value := range values {
+		str := fmt.Sprintf("%v", value)
+		println(str)
+	}
+	c.JSON(200, values)
 }

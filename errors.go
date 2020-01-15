@@ -10,8 +10,8 @@ func checkError(c *gin.Context, err error) {
 		return
 	}
 	if err == mongo.ErrNoDocuments {
-		c.AbortWithStatusJSON(404, err)
+		c.AbortWithStatus(404)
 	} else {
-		c.AbortWithStatusJSON(500, err)
+		c.AbortWithStatus(500)
 	}
 }
