@@ -33,5 +33,8 @@ func getAttachedOrganisations(c *gin.Context) {
 		"organisations",
 		bson.M{"_id": objID},
 	)
+	if err != nil {
+		panic(err)
+	}
 	c.JSON(200, values)
 }

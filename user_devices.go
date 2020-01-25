@@ -52,5 +52,8 @@ func getAttachedDevices(c *gin.Context) {
 		"devices",
 		bson.M{"_id": objID},
 	)
+	if err != nil {
+		panic(err)
+	}
 	c.JSON(200, values)
 }
